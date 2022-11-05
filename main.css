@@ -1,0 +1,68 @@
+*, *::after, *::before {
+    box-sizing: border-box;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+html{
+    font-size: 10px;
+}
+
+body {
+    margin: 1rem;
+    font-size: 1.5rem;
+}
+
+/* Legend */
+
+.legend {
+    width: fit-content;
+    height: fit-content;
+    text-align: center;
+    display: flex;
+    padding: 1rem;
+    flex-direction: column;
+    border-radius: 10px;
+    background-color: rgb(255, 247, 247);
+    filter: drop-shadow(1px 1px 4px rgba(132, 132, 132, 0.5));
+}
+
+ul.labels {
+    padding: 0;
+    list-style-type: none;
+    display: flex;
+    flex-direction: column;
+    gap: .5rem;
+}
+
+.labels .group {
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    gap: 2rem;
+}
+
+.labels .group div{
+    width: 2rem;
+    height: 1rem;
+    border-radius: 20%;
+}
+
+.labels .group p{
+    margin: 0;
+}
+
+.labels .red {
+    background-color: rgb(240, 23, 23);
+}
+
+.labels .green {
+    background-color: rgb(35, 190, 35);
+}
+
+.labels .yellow {
+    background-color: rgb(251, 231, 17);
+}
+
+.labels .blue {
+    background-color: rgb(0, 200, 255);
+}
