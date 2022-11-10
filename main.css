@@ -13,15 +13,30 @@ body {
     font-size: 1.5rem;
 }
 
+/* Main Window */
+
+.main-wd {
+    display: grid;
+    grid-template-columns: 10% auto 20%;
+    margin: 0 2rem;
+}
+
+.left, .right, .middle {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.left {
+    gap: 5rem;
+}
+
 /* Legend */
 
 .legend {
     width: fit-content;
     height: fit-content;
     text-align: center;
-    position: fixed;
-    bottom: 1rem;
-    left: 1rem;
     display: flex;
     padding: 1rem;
     flex-direction: column;
@@ -103,7 +118,6 @@ ul.labels {
 
 .navbar {
     display: flex;
-    position: fixed;
     flex-direction: column;
     width: 5rem;
     gap: 2rem;
@@ -126,3 +140,9 @@ ul.labels {
     transform: scale(1.1);
 }
 
+/* Task Info */
+
+.task-info {
+
+
+}
