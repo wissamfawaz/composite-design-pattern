@@ -26,7 +26,7 @@ body {
     padding: 1rem;
     flex-direction: column;
     border-radius: 10px;
-    background-color: rgb(255, 247, 247);
+    background-color: rgb(255, 255, 255);
     filter: drop-shadow(1px 1px 4px rgba(182, 182, 182, 0.5));
 }
 
@@ -35,7 +35,7 @@ ul.labels {
     list-style-type: none;
     display: flex;
     flex-direction: column;
-    gap: .5rem;
+    gap: 1rem;
 }
 
 .labels .group {
@@ -53,6 +53,10 @@ ul.labels {
 
 .labels .group p{
     margin: 0;
+}
+
+.labels .purple {
+    background-color: rgb(164, 23, 240);
 }
 
 .labels .red {
