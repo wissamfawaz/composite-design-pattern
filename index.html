@@ -8,6 +8,8 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">    
+
 
     <title>Composite Design Pattern</title>
 </head>
@@ -16,39 +18,46 @@
         <section class="project-title">
             <input type="text" placeholder="Untitled Project" id="title" name="title" autocomplete="off">
         </section>
-        <button id="new-task"><img src="Assets/Images/square-plus-regular.svg" alt="Create new task"></button>
     </header>
-    <section class="main-wd"></section>
-    <section class="legend">
-        <h3>Task Legend</h3>
-        <ul class="labels">
+    <section class="main-wd">
 
-            <li class="group">
-                <div class="purple"></div>
-                <p>Project</p>
-            </li>
+        <section class="navbar">
+            <button id="new-task"><img src="Assets/Images/square-plus-regular.svg" alt="Create new task"></button>
+            <button class="save"><img src="Assets/Images/floppy-disk-regular.svg" alt=""></button>
+            <button class="undo"><img src="Assets/Images/rotate-left-solid.svg" alt=""></button>
+            <button class="delete"><img src="Assets/Images/trash-can-regular.svg" alt=""></button>
+        </section>
+        
+        <section class="legend">
+            <h3>Task Legend</h3>
+            <ul class="labels">
 
-            <li class="group">
-                <div class="red"></div>
-                <p>Milestones</p>
-            </li>
+                <li class="group">
+                    <div class="purple"></div>
+                    <p>Project</p>
+                </li>
 
-            <li class="group">
-                <div class="green"></div>
-                <p>Tasks</p>
-            </li>
+                <li class="group">
+                    <div class="red"></div>
+                    <p>Milestones</p>
+                </li>
 
-            <li class="group">
-                <div class="yellow"></div>
-                <p>Subtasks</p>
-            </li>
+                <li class="group">
+                    <div class="green"></div>
+                    <p>Tasks</p>
+                </li>
 
-            <li class="group">
-                <div class="blue"></div>
-                <p>Optional tasks</p>
-            </li>
+                <li class="group">
+                    <div class="yellow"></div>
+                    <p>Subtasks</p>
+                </li>
 
-        </ul>
+                <li class="group">
+                    <div class="blue"></div>
+                    <p>Optional tasks</p>
+                </li>
+            </ul>
+        </section>
     </section>
 </body>
 </html>

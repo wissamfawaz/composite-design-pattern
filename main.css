@@ -99,19 +99,30 @@ ul.labels {
     outline: 1px solid rgb(0, 170, 255);
 }
 
-/* New task Btn */
-#new-task {
+/* NavBar */
+
+.navbar {
+    display: flex;
+    position: fixed;
+    flex-direction: column;
+    width: 5rem;
+    gap: 2rem;
+    margin-top: 5rem;
+}
+
+.navbar button {
     background-color: transparent;
     border: none;
     outline: none;
-    width: 5rem;
-    height: 5rem;
+    width: 4rem;
+    height: 4rem;
 }
 
-#new-task img{    
+.navbar img{    
     transition: .25s ease-in-out;
 }
 
-#new-task :hover {
+.navbar img:hover {
     transform: scale(1.1);
 }
+
