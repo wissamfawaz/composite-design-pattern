@@ -1,3 +1,14 @@
+:root {
+    --light-color-pr: rgb(255, 255, 255);
+    --light-color-sd: rgb(0, 170, 255);
+
+    --project-color: rgb(164, 23, 240);
+    --milestone-color: rgb(240, 23, 23);
+    --task-color: rgb(35, 190, 35);
+    --subtask-color: rgb(251, 231, 17);
+    --optional-task-color: rgb(45, 122, 255);
+}
+
 *, *::after, *::before 
 {
     box-sizing: border-box;
@@ -29,8 +40,9 @@ body
 .main-wd 
 {
     display: grid;
-    grid-template-columns: 1fr 5fr 2fr;
+    grid-template-columns: 1fr 5fr 1fr;
     margin: 0 2rem;
+    gap: 5rem;
 }
 
 .left, .right, .middle 
@@ -52,7 +64,7 @@ body
     text-align: center;
     padding: 1rem;
     border-radius: 10px;
-    background-color: rgb(255, 255, 255);
+    background-color: var(--light-color-pr);
     filter: drop-shadow(1px 1px 4px rgba(182, 182, 182, 0.5));
 }
 
@@ -87,39 +99,38 @@ ul.labels
 
 .labels .purple 
 {
-    background-color: rgb(164, 23, 240);
+    background-color: var(--project-color);
 }
 
 .labels .red 
 {
-    background-color: rgb(240, 23, 23);
+    background-color: var(--milestone-color);
 }
 
 .labels .green 
 {
-    background-color: rgb(35, 190, 35);
+    background-color: var(--task-color);
 }
 
 .labels .yellow 
 {
-    background-color: rgb(251, 231, 17);
+    background-color: var(--subtask-color);
 }
 
 .labels .blue 
 {
-    background-color: rgb(45, 122, 255);
+    background-color: var(--optional-task-color);
 }
 
-/* Title */
+/* Header */
 
-.project-title 
+.project-info 
 {
-    display: flex;
     justify-content: center;
     align-items: center;
 }
 
-.project-title #title 
+.project-info #title 
 {
     font-size: 30px;
     text-align: center;
@@ -128,13 +139,25 @@ ul.labels
     border-radius: 1rem;
     padding: 2rem 0;
     outline: 1px solid rgb(0, 0, 0);
-    margin: 3rem 0;
-    transition: .5s ease-in-out;
+    margin: 3rem 0 1rem 0;
+    transition: .25s ease-in-out;
 }
 
-.project-title #title:focus 
+.project-info #title:focus, .project-info #pgm-name:focus 
 {
-    outline: 1px solid rgb(0, 170, 255);
+    outline: 1px solid var(--light-color-sd);
+}
+
+.project-info #pgm-name 
+{
+    font-size: 15px;
+    text-align: center;
+    background-color: transparent;
+    border: none;
+    margin-bottom: 2rem;
+    padding: 1rem;
+    border-radius: .25rem;
+    /* outline: 1px solid rgb(0, 0, 0); */
 }
 
 /* NavBar */
@@ -169,15 +192,87 @@ ul.labels
     transform: scale(1.1);
 }
 
+/* Tasks Dashboard */
+
+.middle 
+{
+    display: flex;
+    gap: 3rem;
+}
+
+.task-module 
+{
+    /* box-shadow: 1px 1px 4px rgba(182, 182, 182, 0.5); */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 6rem;
+    height: 6rem;
+    border-radius: 1rem;
+}
+
+.milestone .task-module {
+    border: 2px solid var(--milestone-color);
+}
+
+.task .task-module {
+    border: 2px solid var(--task-color);
+}
+
+.subtask .task-module {
+    border: 2px solid var(--subtask-color);
+}
+
+.optional .task-module {
+    border: 2px solid var(--optional-task-color);
+}
+
+.project-scope 
+{
+    min-width: 10rem;
+    height: 10rem;
+    border: 3px solid var(--project-color);
+}
+
+.middle .container 
+{
+    border: 1px solid black;
+    height: 100%;
+    width: 100%;
+    flex-grow: 1;
+}
+
+.path-module 
+{
+    display: flex;
+    align-items: center;
+    flex-grow: 1;
+}
+
+.path-module .package 
+{
+    height: 100%;
+    width: 100%;
+    padding: 0;
+    margin: 0;
+    border: 1px solid black;
+    flex-grow: 1;
+}
+
+.package li {
+    list-style-type: none;
+}
+
 /* Task Info */
 
 .task-info 
 {
+    text-align: center;
     transition: .25s ease-in-out;
     text-decoration: underline;
 }
 
 .task-info:hover 
 {
-    color: rgb(0, 170, 255)
+    color: var(--light-color-sd);
 }

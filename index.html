@@ -15,8 +15,9 @@
 </head>
 <body>
     <header>
-        <section class="project-title">
+        <section class="project-info flex-col">
             <input type="text" placeholder="Untitled Project" id="title" name="title" autocomplete="off">
+            <input type="text" placeholder="Project Manager Name" id="pgm-name" name="pgm-name" autocomplete="off">
         </section>
     </header>
     <section class="main-wd">
@@ -35,7 +36,7 @@
 
                     <li class="group">
                         <div class="purple"></div>
-                        <p>Project</p>
+                        <p>Project Scope</p>
                     </li>
 
                     <li class="group">
@@ -62,14 +63,47 @@
             </section>
         </section>
 
-        <section class="middle flex-col">
-            
+        <section class="middle">
+            <div class="task-module project-scope"></div>
+            <div class="container flex-col">
+
+                <!-- Row of tasks module -->
+                <div class="path-module">
+                    <ul class="package milestone">
+                        <li class="task-module">Milestone 1</li>
+                    </ul>
+                    <ul class="package task">
+                        <li class="task-module">Task 1</li>
+                    </ul>
+                    <ul class="package subtask">
+                        <li class="task-module">Subtask 1</li>
+                    </ul>
+                    <ul class="package optional">
+                        <li class="task-module">Optional Task 1</li>
+                    </ul>
+                </div>
+
+                <div class="path-module">
+                    <ul class="package milestone"></ul>
+                    <ul class="package task"></ul>
+                    <ul class="package subtask"></ul>
+                    <ul class="package optional"></ul>
+                </div>
+
+                <div class="path-module">
+                    <ul class="package milestone"></ul>
+                    <ul class="package task"></ul>
+                    <ul class="package subtask"></ul>
+                    <ul class="package optional"></ul>
+                </div>
+                
+            </div>
         </section>
 
         <section class="right flex-col">
             <section class="task-info">
                 <h2>Task Info</h2>
-                div.
+                
             </section>
         </section>
 
