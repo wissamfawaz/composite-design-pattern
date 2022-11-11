@@ -236,7 +236,6 @@ ul.labels
 
 .middle .container 
 {
-    border: 1px solid black;
     height: 100%;
     width: 100%;
     flex-grow: 1;
@@ -251,11 +250,11 @@ ul.labels
 
 .path-module .package 
 {
+    border: 1px solid black;
     height: 100%;
     width: 100%;
     padding: 0;
     margin: 0;
-    border: 1px solid black;
     flex-grow: 1;
 }
 
