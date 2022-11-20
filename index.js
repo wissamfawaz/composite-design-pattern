@@ -22,6 +22,7 @@ newTaskBtn.addEventListener("click", function(e) {
     `
 })
 
+
 undoBtn.addEventListener("click", function(e) {
     containerEl.lastElementChild.remove();
     i--;
