@@ -24,7 +24,7 @@
 
         <section class="left flex-col">
             <section class="navbar flex-col">
-                <button id="new-task"><img src="Assets/Images/square-plus-regular.svg" alt="Create new task"></button>
+                <button class="new-task"><img src="Assets/Images/square-plus-regular.svg" alt="Create new task"></button>
                 <button class="save"><img src="Assets/Images/floppy-disk-regular.svg" alt=""></button>
                 <button class="undo"><img src="Assets/Images/rotate-left-solid.svg" alt=""></button>
                 <button class="delete"><img src="Assets/Images/trash-can-regular.svg" alt=""></button>
@@ -64,6 +64,9 @@
         </section>
 
         <section class="middle">
+
+            <div class="flex-col no-task-img invisible"><img src="Assets/Images/sad-duckling.png" alt="sad-duckling">You don't have any task planned for today. #sadDuck</div>
+
             <div class="task-module project-scope">Project Scope</div>
             <div class="container flex-col">
 
@@ -75,15 +78,6 @@
                     <ul class="package task">
                         <li class="task-module">Task 1.1</li>
                         <li class="task-module">Task 1.2</li>
-                        <!--
-                        <li class="task-module">Task 1.2</li>
-                        <li class="task-module">Task 1.2</li>
-                        <li class="task-module">Task 1.2</li>
-                        <li class="task-module">Task 1.2</li>
-                        <li class="task-module">Task 1.2</li>
-                        <li class="task-module">Task 1.2</li> 
-                        -->
-
                     </ul>
                     <ul class="package subtask">
                         <li class="task-module">Subtask 1.1</li>
@@ -91,27 +85,7 @@
                     <ul class="package optional">
                         <li class="task-module">Optional Task 1.1</li>
                     </ul>
-                </div>
-
-                <div class="path-module">
-                    <ul class="package milestone">
-                        <li class="task-module">Milestone 2</li>
-                    </ul>
-                    <ul class="package task"></ul>
-                    <ul class="package subtask"></ul>
-                    <ul class="package optional"></ul>
-                </div>
-
-                <div class="path-module">
-                    <ul class="package milestone">
-                        <li class="task-module">Milestone 3</li>
-
-                    </ul>
-                    <ul class="package task"></ul>
-                    <ul class="package subtask"></ul>
-                    <ul class="package optional"></ul>
-                </div>
-                
+                </div>              
             </div>
         </section>
 
@@ -165,5 +139,7 @@
         </section>
 
     </section>
+
+    <script src="index.js"></script>
 </body>
 </html>

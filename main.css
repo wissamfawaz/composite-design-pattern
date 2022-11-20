@@ -261,6 +261,7 @@ ul.labels
 
 .package {
     display: flex;
+    min-width: 10rem;
     justify-content: space-evenly;
     align-items: center;
     flex-wrap: wrap;
@@ -347,6 +348,29 @@ ul.labels
 .task-info h2:hover:after{
     transform: scaleX(1);
     transform-origin: center;
+}
+
+/* No task image */
+
+.no-task-img
+{
+    position: absolute;
+    left: 40rem;
+    margin: auto;
+    z-index: -1;
+    text-align: center;
+    color:rgb(172, 172, 172);
+    font-size: 2rem;
+}
+
+.no-task-img img
+{
+    width: 70rem;
+}
+
+.invisible 
+{
+    opacity: 0;
 }
 
 /* Form */
