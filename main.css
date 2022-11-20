@@ -55,6 +55,10 @@ body
     gap: 5rem;
 }
 
+.right {
+    justify-content: center;
+}
+
 /* Legend */
 
 .legend 
@@ -218,7 +222,6 @@ ul.labels
 
 .task-module 
 {
-    /* box-shadow: 1px 1px 4px rgba(182, 182, 182, 0.5); */
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -256,6 +259,32 @@ ul.labels
     border-color: var(--project-color);
 }
 
+.package {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    flex-wrap: wrap;
+    list-style-type: none;
+}
+
+.package, .package > * {
+    transition: .25s ease-in-out;
+}
+
+.package:hover {
+    background-color: rgba(205, 205, 205, 0.5);
+}
+
+.package > *:hover {
+    background-color: var(--light-color-pr);
+}
+
+.package.milestone > .task-module 
+{
+    width: clamp(6.5rem, 7rem, 8rem);
+    height: clamp(6.5rem, 7rem, 8rem);
+}
+
 .middle .container 
 {
     height: 100%;
@@ -281,14 +310,6 @@ ul.labels
     flex-grow: 1;
 }
 
-.package {
-    display: flex;
-    justify-content: space-evenly;
-    align-items: center;
-    flex-wrap: wrap;
-    list-style-type: none;
-}
-
 /* Task Info */
 
 .task-info 
@@ -297,9 +318,11 @@ ul.labels
     transition: .25s ease-in-out;
 }
 
-.task-info h2 
+.task-info > h2 
 {
     position: relative;
+    width: 10rem;
+    display: inline-block;
 }
 
 .task-info h2:after {
@@ -316,7 +339,7 @@ ul.labels
 }
 
 
-.task-info:hover 
+.task-info h2:hover 
 {
     color: var(--light-color-sd);
 }
@@ -324,4 +347,54 @@ ul.labels
 .task-info h2:hover:after{
     transform: scaleX(1);
     transform-origin: center;
+}
+
+/* Form */
+
+.task-properties
+{
+    box-shadow: 1px 1px 4px rgba(182, 182, 182, 0.5);
+    gap: 1.5rem;
+    padding: 1rem;
+    border-radius: 1rem;
+}
+
+.task-properties fieldset 
+{
+    border: none;
+}
+
+.task-properties fieldset:not(fieldset:has(input.submit)) {
+    text-align: start;
+}
+
+.task-properties label {
+    display: flex;
+    justify-content: space-between;
+    color: rgb(44, 44, 44);
+}
+
+.task-properties textarea {
+    display: block;
+    resize: none;
+}
+
+.task-properties .submit {
+    justify-self: center;
+}
+
+.task-properties .submit {
+    font-size: 2rem;
+    padding: 1rem 2rem;
+    background-color: var(--light-color-pr);
+    border: none;
+    border-radius: 1rem;
+    box-shadow: 1px 1px 4px rgba(182, 182, 182, 0.5);
+    transition: .25s ease-in-out;
+}
+
+.task-properties .submit:hover
+{
+    color: var(--light-color-sd);
+    box-shadow: -3px 2px var(--light-color-sd);
 }

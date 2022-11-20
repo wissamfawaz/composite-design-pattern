@@ -118,7 +118,49 @@
         <section class="right flex-col">
             <section class="task-info">
                 <h2>Task Info</h2>
-                
+                <form action="" class="task-properties flex-col">
+                    <fieldset>
+                        <label for="textarea">Recipients
+                            <textarea type="textarea" class="recipients" name="recipients" id="recipients" required></textarea>
+                        </label>
+                    </fieldset>
+                    <fieldset>
+                        <label for="start-date">Start Date
+                            <input type="date" class="start-date" name="start-date" id="start-date" required>
+                        </label>
+                    </fieldset>
+                    <fieldset>
+                        <label for="due-date">Due Date
+                            <input type="date" class="due-date" name="due-date" id="due-date" required>
+                        </label>
+                    </fieldset>
+                    <fieldset>
+                        <label for="parent-task">Parent Task
+                            <select name="parent-task" class="parent-task" id="parent-task">
+                                <option value="task-1.1" selected>Task 1.1</option>
+                                <option value="task-1.2">Task 1.2</option>
+                            </select>
+                        </label>
+                    </fieldset>
+                    <fieldset>
+                        <label for="budget">Budget $
+                            <input type="number" class="budget" name="budget" id="budget" min="0.00" max="10000.00" step="0.01">
+                        </label>
+                    </fieldset>
+                    <fieldset>
+                        <label for="linked-documents">Linked Documents
+                            <input type="file" class="linked-documents" name="linked-documents" id="linked-documents" min="0" max="5">
+                        </label>
+                    </fieldset>
+                    <fieldset>
+                        <label for="add-notes">Additional Notes
+                            <textarea type="textarea" class="add-notes" name="add-notes" id="add-notes"></textarea>
+                        </label>
+                    </fieldset>
+                    <fieldset>
+                        <input type="submit" class="submit" value="Save"/>
+                    </fieldset>
+                </form>
             </section>
         </section>
 
