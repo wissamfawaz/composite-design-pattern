@@ -4,13 +4,10 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="main.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">    
-
-
+    <link rel="stylesheet" href="main.css">
     <title>Composite Design Pattern</title>
 </head>
 <body>
@@ -24,12 +21,12 @@
 
         <section class="left flex-col">
             <section class="navbar flex-col">
-                <button class="new-task"><img src="Assets/Images/square-plus-regular.svg" alt="Create new task"></button>
-                <button class="save"><img src="Assets/Images/floppy-disk-regular.svg" alt=""></button>
-                <button class="undo"><img src="Assets/Images/rotate-left-solid.svg" alt=""></button>
-                <button class="delete"><img src="Assets/Images/trash-can-regular.svg" alt=""></button>
+                <button class="new-task"><i class="fa-solid fa-diagram-next"></i></button>
+                <button class="save"><i class="fa-solid fa-floppy-disk"></i></button>
+                <button class="undo"><i class="fa-solid fa-eraser"></i></button>
+                <button class="delete"><i class="fa-solid fa-trash-can"></i></button>
             </section>
-            
+
             <section class="legend flex-col">
                 <h3>Task Legend</h3>
                 <ul class="labels flex-col">
@@ -65,7 +62,7 @@
 
         <section class="middle">
 
-            <div class="flex-col no-task-img invisible"><img src="Assets/Images/sad-duckling.png" alt="sad-duckling">You don't have any task planned for today. #sadDuck</div>
+            <div class="flex-col no-task-img invisible"><img src="Assets/Images/sad-duckling.png" alt="sad-duckling"><p>You don't have any task planned for this project. #sad_duck</p></div>
 
             <div class="task-module project-scope">Project Scope</div>
             <div class="container flex-col">
@@ -140,6 +137,7 @@
 
     </section>
 
-    <script src="index.js"></script>
+    <script src="index.js" type="module"></script>
+    <script src="https://kit.fontawesome.com/bfb536358e.js" crossorigin="anonymous"></script>
 </body>
 </html>
