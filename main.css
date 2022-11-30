@@ -2,9 +2,9 @@
     --light-color-pr: rgb(255, 255, 255);
     --light-color-sd: rgb(0, 170, 255);
 
-    --project-color: rgb(253, 70, 247);
-    --milestone-color: rgb(240, 23, 23);
-    --task-color: rgb(35, 190, 35);
+    --sprint-color: rgb(253, 70, 247);
+    --epic-color: rgb(240, 23, 23);
+    --user-story-color: rgb(35, 190, 35);
     --subtask-color: rgb(251, 231, 17);
     --optional-task-color: rgb(45, 122, 255);
 }
@@ -117,17 +117,17 @@ ul.labels
 
 .labels .purple 
 {
-    background-color: var(--project-color);
+    background-color: var(--sprint-color);
 }
 
 .labels .red 
 {
-    background-color: var(--milestone-color);
+    background-color: var(--epic-color);
 }
 
 .labels .green 
 {
-    background-color: var(--task-color);
+    background-color: var(--user-story-color);
 }
 
 .labels .yellow 
@@ -176,6 +176,12 @@ ul.labels
     padding: 1rem;
     border-radius: .25rem;
     /* outline: 1px solid rgb(0, 0, 0); */
+}
+
+.sprint-questers 
+{
+    display: flex;
+    gap: 5rem;
 }
 
 /* NavBar */
@@ -239,12 +245,12 @@ ul.labels
     border-radius: 1rem;
 }
 
-.milestone .task-module {
-    border-color: var(--milestone-color);
+.epic .task-module {
+    border-color: var(--epic-color);
 }
 
-.task .task-module {
-    border-color: var(--task-color);
+.user-story .task-module {
+    border-color: var(--user-story-color);
 }
 
 .subtask .task-module {
@@ -255,13 +261,19 @@ ul.labels
     border-color: var(--optional-task-color);
 }
 
-.project-scope 
+.project-sprint 
 {
     font-size: 2rem;
     font-weight: bold;
     min-width: 10rem;
     height: 10rem;
-    border-color: var(--project-color);
+    border-color: var(--sprint-color);
+    transition: .25s ease-in-out;
+}
+
+.project-sprint:hover 
+{
+    color: var(--sprint-color);
 }
 
 .package {

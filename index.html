@@ -8,13 +8,17 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="main.css">
-    <title>Composite Design Pattern</title>
+    <script src="https://kit.fontawesome.com/bfb536358e.js" crossorigin="anonymous"></script>
+    <title>SprintQuest</title>
 </head>
 <body>
     <header>
         <section class="project-info flex-col">
-            <input type="text" placeholder="Untitled Project" id="title" name="title" autocomplete="off">
-            <input type="text" placeholder="Project Manager Name" id="pgm-name" name="pgm-name" autocomplete="off">
+            <input type="text" placeholder="Untitled SprintQuest" id="title" name="title" autocomplete="off">
+            <div class="sprint-questers">
+                <input type="text" placeholder="Scrum Master" id="pgm-name" name="scrum-master" autocomplete="off">
+                <input type="text" placeholder="Product Owner" id="pgm-name" name="product-owner" autocomplete="off">
+            </div>
         </section>
     </header>
     <section class="main-wd">
@@ -33,17 +37,17 @@
 
                     <li class="group">
                         <div class="purple"></div>
-                        <p>Project Scope</p>
+                        <p>SprintQuest #</p>
                     </li>
 
                     <li class="group">
                         <div class="red"></div>
-                        <p>Milestones</p>
+                        <p>Epics</p>
                     </li>
 
                     <li class="group">
                         <div class="green"></div>
-                        <p>Tasks</p>
+                        <p>User Stories</p>
                     </li>
 
                     <li class="group">
@@ -62,19 +66,19 @@
 
         <section class="middle">
 
-            <div class="flex-col no-task-img invisible"><img src="Assets/Images/sad-duckling.png" alt="sad-duckling"><p>You don't have any task planned for this project. #sad_duck</p></div>
+            <div class="flex-col no-task-img invisible"><img src="Assets/Images/sad-duckling.png" alt="sad-duckling"><p>You don't have any task planned for this sprint. #sad_duck</p></div>
 
-            <div class="task-module project-scope">Project Scope</div>
+            <div class="task-module project-sprint">Sprint Quest #</div>
             <div class="container flex-col">
 
                 <!-- Module: Row of tasks (Path) -->
                 <div class="path-module">
-                    <ul class="package milestone">
-                        <li class="task-module">Milestone 1</li>
+                    <ul class="package epic">
+                        <li class="task-module">Epic 1</li>
                     </ul>
-                    <ul class="package task">
-                        <li class="task-module">Task 1.1</li>
-                        <li class="task-module">Task 1.2</li>
+                    <ul class="package user-story">
+                        <li class="task-module">User Story 1.1</li>
+                        <li class="task-module">User Story 1.2</li>
                     </ul>
                     <ul class="package subtask">
                         <li class="task-module">Subtask 1.1</li>
@@ -138,6 +142,5 @@
     </section>
 
     <script src="index.js" type="module"></script>
-    <script src="https://kit.fontawesome.com/bfb536358e.js" crossorigin="anonymous"></script>
 </body>
 </html>
