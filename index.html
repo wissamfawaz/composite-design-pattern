@@ -21,18 +21,21 @@
             </div>
         </section>
     </header>
+
+    <div class="flex-col no-task-img invisible"><img src="Assets/Images/sad-duckling.png" alt="sad-duckling"><p>You don't have any task planned for this sprint. #sad_duck</p></div>
+
     <section class="main-wd">
 
         <section class="left flex-col">
             <section class="navbar flex-col">
                 <button class="new-task"><i class="fa-solid fa-diagram-next"></i></button>
                 <button class="save"><i class="fa-solid fa-floppy-disk"></i></button>
-                <button class="undo"><i class="fa-solid fa-eraser"></i></button>
-                <button class="delete"><i class="fa-solid fa-trash-can"></i></button>
+                <button class="erase"><i class="fa-solid fa-eraser"></i></button>
+                <button class="delete" onclick="confirmDelete()"><i class="fa-solid fa-trash-can"></i></button>
             </section>
 
             <section class="legend flex-col">
-                <h3>Task Legend</h3>
+                <h3>Quest Legend</h3>
                 <ul class="labels flex-col">
 
                     <li class="group">
@@ -66,8 +69,6 @@
 
         <section class="middle">
 
-            <div class="flex-col no-task-img invisible"><img src="Assets/Images/sad-duckling.png" alt="sad-duckling"><p>You don't have any task planned for this sprint. #sad_duck</p></div>
-
             <div class="task-module project-sprint">Sprint Quest #</div>
             <div class="container flex-col">
 
@@ -76,13 +77,15 @@
                     <ul class="package epic">
                         <li class="task-module">Epic 1</li>
                     </ul>
+                    <div><i class="fa-solid fa-arrow-right"></i></div>
                     <ul class="package user-story">
                         <li class="task-module">User Story 1.1</li>
-                        <li class="task-module">User Story 1.2</li>
                     </ul>
+                    <div><i class="fa-solid fa-arrow-right"></i></div>
                     <ul class="package subtask">
                         <li class="task-module">Subtask 1.1</li>
                     </ul>
+                    <div><i class="fa-solid fa-arrow-right"></i></div>
                     <ul class="package optional">
                         <li class="task-module">Optional Task 1.1</li>
                     </ul>
@@ -92,7 +95,7 @@
 
         <section class="right flex-col">
             <section class="task-info">
-                <h2>Task Info</h2>
+                <h2>Quest Info</h2>
                 <form action="" class="task-properties flex-col">
                     <fieldset>
                         <label for="textarea">Recipients
