@@ -40,7 +40,7 @@ deleteBtn.addEventListener("click", function(e) {
 })
 
 containerEl.addEventListener("click", function(e) {
-    if(e.target && e.target.matches("ul.package") && !e.target.classList.contains('milestone')) {
+    if(e.target && e.target.matches("ul.package") && !e.target.classList.contains('epic')) {
 
         // if(e.target.classList.contains('task') || path.ch)
 
