@@ -7,6 +7,8 @@ const deleteBtn = document.querySelector(".delete");
 const duckEl = document.querySelector(".no-task-img");
 const projectSprintEl = document.querySelector(".project-sprint");
 const rightEl = document.querySelector(".right");
+const middleEl = document.querySelector(".middle");
+const leftEl = document.querySelector(".left");
 let packageEl  = document.querySelectorAll(".package");
 let i = 2;
 
@@ -37,6 +39,7 @@ eraseBtn.addEventListener("click", function(e) {
     checkEmpty();
 })
 
+//Delete SprintQuest canvas
 deleteBtn.addEventListener("click", function(e) {
     if(confirmDelete()){
         while(containerEl.childElementCount > 0) {
@@ -48,6 +51,7 @@ deleteBtn.addEventListener("click", function(e) {
     }
 })
 
+//Create task
 containerEl.addEventListener("click", function(e) {
     if(e.target && e.target.matches("ul.package") && !eraseBtn.classList.contains('erase-active')) {
         let wrapper = document.createElement("li");
@@ -57,9 +61,25 @@ containerEl.addEventListener("click", function(e) {
     }
 })
 
+//Erase task
 containerEl.addEventListener("click", function(e) {
     if(eraseBtn.classList.contains('erase-active') && e.target.matches("li.task-module")) {
         e.target.classList.add('toRemove');
+    }
+})
+
+
+//When task is clicked open task form to input info
+middleEl.addEventListener("dblclick", function(e) {
+    if(e.target && (e.target.matches("li.task-module") || e.target.matches("div.project-sprint")) && !eraseBtn.classList.contains('erase-active')) {
+        rightEl.style.display = 'block';
+    }
+})
+
+//Cancel task creation
+rightEl.addEventListener("click", function(e) {
+    if(e.target && e.target.matches("button.cancel")) {
+        rightEl.style.display = 'none';
     }
 })
 
