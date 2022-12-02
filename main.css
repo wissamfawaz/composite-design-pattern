@@ -74,9 +74,9 @@ body
     width: fit-content;
     height: fit-content;
     text-align: center;
-    position: fixed;
+    position: sticky;
     left: 1rem;
-    bottom: 1rem;
+    top: 20vh;
     padding: 1rem;
     border-radius: 10px;
     background-color: var(--light-color-pr);
@@ -285,6 +285,25 @@ ul.labels
     box-shadow: 1px 1px 7px rgba(197, 197, 197, 0.803);
     border-radius: 1rem;
     margin: 1rem 0;
+    transition: .25s ease-in-out;
+}
+
+.path-module .fa-delete-left
+{
+    display: none;
+    transform: rotateZ(180deg);
+    margin: 0 2rem;
+    font-size: 2rem;
+    transition: .25s ease-in-out;
+}
+
+.path-module .fa-delete-left.display {
+    display: block;
+}
+
+.path-module:hover .fa-delete-left
+{
+    color: var(--light-color-sd)
 }
 
 .task-module 
@@ -506,9 +525,7 @@ ul.labels
 
 .toRemove
 {
-    opacity: 0;
-    position: absolute;
-    z-index: -10;
+    display: none;
 }
 
 /* Media Queries */

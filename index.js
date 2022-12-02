@@ -4,23 +4,30 @@ const newTaskBtn = document.querySelector(".new-task");
 const containerEl = document.querySelector(".container");
 const eraseBtn = document.querySelector(".erase");
 const deleteBtn = document.querySelector(".delete");
+let deleteRowBtn = document.querySelectorAll(".fa-delete-left");
+
 const duckEl = document.querySelector(".no-task-img");
 const projectSprintEl = document.querySelector(".project-sprint");
+const pathModulesEl = document.querySelectorAll(".path-modules");
 const rightEl = document.querySelector(".right");
 const middleEl = document.querySelector(".middle");
 const leftEl = document.querySelector(".left");
-let packageEl  = document.querySelectorAll(".package");
+const packageEl  = document.querySelectorAll(".package");
+
 let i = 2;
 
 //$ Event Listeners
 
+//Create task module
 newTaskBtn.addEventListener("click", function(e) {
     checkEmpty();
+    if(!eraseBtn.classList.contains("erase-active")) {
     let wrapper = document.createElement("div");
     wrapper.classList.add("path-module");
     
     wrapper.insertAdjacentHTML("beforeend", 
     `
+        <i class="fa-solid fa-delete-left"></i>
         <ul class="package epic">
             <li class="task-module">Epic ${i++}</li>
         </ul>
@@ -32,10 +39,12 @@ newTaskBtn.addEventListener("click", function(e) {
         <ul class="package optional"></ul>
     `);
     containerEl.appendChild(wrapper);
+    }
 })
 
 eraseBtn.addEventListener("click", function(e) {
     eraseBtn.classList.toggle("erase-active");
+    activateDeleteRows();
     checkEmpty();
 })
 
@@ -63,8 +72,15 @@ containerEl.addEventListener("click", function(e) {
 
 //Erase task
 containerEl.addEventListener("click", function(e) {
-    if(eraseBtn.classList.contains('erase-active') && e.target.matches("li.task-module")) {
+    if(eraseBtn.classList.contains('erase-active') && (e.target.matches("li.task-module") || e.target.matches("i.fa-delete-left"))) {
         e.target.classList.add('toRemove');
+    }
+})
+
+//Erase Path Module
+containerEl.addEventListener("click", function(e) {
+    if(eraseBtn.classList.contains('erase-active') && e.target.matches("i.fa-delete-left")) {
+        e.target.parentElement.classList.add('toRemove');
     }
 })
 
@@ -98,3 +114,8 @@ function confirmDelete() {
     return (confirm(text) == true);
 }
 
+function activateDeleteRows() 
+{
+    deleteRowBtn = document.querySelectorAll(".fa-delete-left");
+    deleteRowBtn.forEach(deleteRowBtn => deleteRowBtn.classList.toggle('display'));
+}
