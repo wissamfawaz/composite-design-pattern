@@ -370,6 +370,16 @@ ul.labels
     height: clamp(6.5rem, 7rem, 8rem);
 }
 
+.package-labels
+{
+    display: grid;
+    grid-template-columns: repeat(4, 25%);
+    font-size: 2rem;
+    font-weight: bold;
+    text-align: center;
+    align-items: center;
+}
+
 /* Task Info */
 
 .task-info 

@@ -6,6 +6,7 @@ const eraseBtn = document.querySelector(".erase");
 const deleteBtn = document.querySelector(".delete");
 let deleteRowBtn = document.querySelectorAll(".fa-delete-left");
 
+const packageLabelsEl = document.querySelector(".package-labels");
 const duckEl = document.querySelector(".no-task-img");
 const projectSprintEl = document.querySelector(".project-sprint");
 const pathModulesEl = document.querySelectorAll(".path-modules");
@@ -22,6 +23,7 @@ let i = 2;
 newTaskBtn.addEventListener("click", function(e) {
     checkEmpty();
     if(!eraseBtn.classList.contains("erase-active")) {
+    packageLabelsEl.classList.remove('invisible');
     let wrapper = document.createElement("div");
     wrapper.classList.add("path-module");
     
@@ -57,9 +59,10 @@ eraseBtn.addEventListener("click", function(e) {
 //Delete SprintQuest canvas
 deleteBtn.addEventListener("click", function(e) {
     if(confirmDelete()){
-        while(containerEl.childElementCount > 0) {
+        while(containerEl.childElementCount > 0 && !containerEl.lastElementChild.matches("div.package-labels")) {
             containerEl.lastElementChild.remove();
         }
+        packageLabelsEl.classList.add("invisible");
         i = 1;
         if(duckEl.classList.contains('invisible'))
         checkEmpty();
@@ -108,7 +111,7 @@ rightEl.addEventListener("click", function(e) {
 //$ Functions
 
 function checkEmpty() {
-    if(containerEl.childElementCount === 0) {
+    if(containerEl.childElementCount === 1) {
         duckEl.classList.toggle('invisible');
         projectSprintEl.classList.toggle('invisible');
         rightEl.classList.toggle('invisible');
