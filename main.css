@@ -297,7 +297,8 @@ ul.labels
     transition: .25s ease-in-out;
 }
 
-.path-module .fa-delete-left.display {
+.path-module .fa-delete-left.display 
+{
     display: block;
 }
 
@@ -375,6 +376,7 @@ ul.labels
     display: grid;
     grid-template-columns: repeat(4, 25%);
     font-size: 2rem;
+    margin-top: -2rem;
     font-weight: bold;
     text-align: center;
     align-items: center;
@@ -417,7 +419,8 @@ ul.labels
     color: var(--light-color-sd);
 }
 
-.task-info h2:hover:after{
+.task-info h2:hover:after
+{
     transform: scaleX(1);
     transform-origin: center;
 }
@@ -571,6 +574,7 @@ ul.labels
     .project-sprint
     {
         transform: none;
+        margin-bottom: 2rem;
     }
 
     .right 
