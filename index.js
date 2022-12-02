@@ -18,7 +18,7 @@ let i = 2;
 
 //$ Event Listeners
 
-//Create task module
+//Create task module (row)
 newTaskBtn.addEventListener("click", function(e) {
     checkEmpty();
     if(!eraseBtn.classList.contains("erase-active")) {
@@ -42,6 +42,7 @@ newTaskBtn.addEventListener("click", function(e) {
     }
 })
 
+//Erase feature
 eraseBtn.addEventListener("click", function(e) {
     eraseBtn.classList.toggle("erase-active");
     activateDeleteRows();

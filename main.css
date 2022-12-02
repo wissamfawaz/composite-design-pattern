@@ -416,9 +416,8 @@ ul.labels
 
 .no-task-img
 {
-    position: absolute;
-    margin-left: 25vw;
     z-index: -1;
+    margin: 0 auto;
     text-align: center;
     color:rgb(172, 172, 172);
     font-size: 2rem;
@@ -436,8 +435,7 @@ ul.labels
 
 .invisible 
 {
-    opacity: 0;
-    z-index: -1;
+    display: none !important;
 }
 
 /* Form */
