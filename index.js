@@ -45,6 +45,11 @@ newTaskBtn.addEventListener("click", function(e) {
 //Erase feature
 eraseBtn.addEventListener("click", function(e) {
     eraseBtn.classList.toggle("erase-active");
+    if(eraseBtn.classList.contains("erase-active")) {
+        eraseBtn.title = 'Deactivate Eraser'
+    } else {
+        eraseBtn.title = 'Activate Eraser'
+    }
     activateDeleteRows();
     checkEmpty();
 })
