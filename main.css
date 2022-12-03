@@ -534,11 +534,6 @@ ul.labels
     justify-content: space-evenly;
 }
 
-.toRemove
-{
-    display: none;
-}
-
 /* Media Queries */
 
 @media screen and (max-width: 940px) 

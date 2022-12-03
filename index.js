@@ -23,7 +23,6 @@ let i = 2;
 newTaskBtn.addEventListener("click", function(e) {
     checkEmpty();
     if(!eraseBtn.classList.contains("erase-active")) {
-    packageLabelsEl.classList.remove('invisible');
     let wrapper = document.createElement("div");
     wrapper.classList.add("path-module");
     
@@ -44,7 +43,7 @@ newTaskBtn.addEventListener("click", function(e) {
     }
 })
 
-//Erase feature
+//Erase button activate / deactivate
 eraseBtn.addEventListener("click", function(e) {
     eraseBtn.classList.toggle("erase-active");
     if(eraseBtn.classList.contains("erase-active")) {
@@ -53,7 +52,6 @@ eraseBtn.addEventListener("click", function(e) {
         eraseBtn.title = 'Activate Eraser'
     }
     activateDeleteRows();
-    checkEmpty();
 })
 
 //Delete SprintQuest canvas
@@ -62,9 +60,8 @@ deleteBtn.addEventListener("click", function(e) {
         while(containerEl.childElementCount > 0 && !containerEl.lastElementChild.matches("div.package-labels")) {
             containerEl.lastElementChild.remove();
         }
-        packageLabelsEl.classList.add("invisible");
         i = 1;
-        if(duckEl.classList.contains('invisible'))
+        if(duckEl.classList.contains("invisible"))
         checkEmpty();
     }
 })
@@ -81,16 +78,17 @@ containerEl.addEventListener("click", function(e) {
 
 //Erase task
 containerEl.addEventListener("click", function(e) {
-    if(eraseBtn.classList.contains('erase-active') && (e.target.matches("li.task-module") || e.target.matches("i.fa-delete-left"))) {
-        e.target.classList.add('toRemove');
+    if(eraseBtn.classList.contains('erase-active') && e.target.matches("li.task-module")) {
+        e.target.parentNode.removeChild(e.target);
     }
 })
 
 //Erase Path Module
 containerEl.addEventListener("click", function(e) {
     if(eraseBtn.classList.contains('erase-active') && e.target.matches("i.fa-delete-left")) {
-        e.target.parentElement.classList.add('toRemove');
+        e.target.parentNode.parentNode.removeChild(e.target.parentNode);
     }
+    checkEmpty();
 })
 
 
@@ -115,6 +113,7 @@ function checkEmpty() {
         duckEl.classList.toggle('invisible');
         projectSprintEl.classList.toggle('invisible');
         rightEl.classList.toggle('invisible');
+        packageLabelsEl.classList.toggle('invisible');
     }
 }
 
