@@ -17,6 +17,9 @@ const packageEl  = document.querySelectorAll(".package");
 
 let i = 2;
 
+//$ Creating the project
+Project
+
 //$ Event Listeners
 
 //Create task module (row)
