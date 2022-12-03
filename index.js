@@ -1,4 +1,4 @@
-import {Task, MainTask, Milestone, Project} from "./composite";
+import {Task, MainTask, Milestone, Project} from "./composite.js";
 
 //$ Constants and Variables
 
@@ -19,7 +19,8 @@ const packageEl  = document.querySelectorAll(".package");
 
 let i = 2;
 
-//$ Creating the project
+//$ Initiating the project
+//feature backend
 const project = new Project();
 
 //$ Event Listeners
@@ -45,6 +46,8 @@ newTaskBtn.addEventListener("click", function(e) {
         <ul class="package optional"></ul>
     `);
     containerEl.appendChild(wrapper);
+
+    //feature backend
     project.createMilestone();
     }
 })
@@ -69,7 +72,10 @@ deleteBtn.addEventListener("click", function(e) {
         i = 1;
         if(duckEl.classList.contains("invisible"))
         checkEmpty();
+
+        //feature backend
         project.clearProject();
+        console.log(project);
     }
 })
 
@@ -81,9 +87,9 @@ containerEl.addEventListener("click", function(e) {
         wrapper.textContent = "Untitled " + e.target.classList[1];
         e.target.appendChild(wrapper);
 
-        if(e.target.matches("ul.package.epic")) {
-            console.log("found epic");
-        }
+        //feature backend
+        identifyChild(e.target);
+        
     }
 })
 
@@ -129,7 +135,7 @@ function checkEmpty() {
 }
 
 function confirmDelete() {
-    let text = "You are about to delete your whole quest. Are you sure?";
+    let text = "You are about to NUKE your whole SprintQuest. Are you sure?";
     return (confirm(text) == true);
 }
 
