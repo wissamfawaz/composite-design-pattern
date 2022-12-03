@@ -1,3 +1,5 @@
+import {Task, MainTask, Milestone, Project} from "./composite";
+
 //$ Constants and Variables
 
 const newTaskBtn = document.querySelector(".new-task");
@@ -18,7 +20,7 @@ const packageEl  = document.querySelectorAll(".package");
 let i = 2;
 
 //$ Creating the project
-Project
+const project = new Project();
 
 //$ Event Listeners
 
@@ -43,6 +45,7 @@ newTaskBtn.addEventListener("click", function(e) {
         <ul class="package optional"></ul>
     `);
     containerEl.appendChild(wrapper);
+    project.createMilestone();
     }
 })
 
@@ -66,6 +69,7 @@ deleteBtn.addEventListener("click", function(e) {
         i = 1;
         if(duckEl.classList.contains("invisible"))
         checkEmpty();
+        project.clearProject();
     }
 })
 
@@ -76,6 +80,10 @@ containerEl.addEventListener("click", function(e) {
         wrapper.classList.add('task-module');
         wrapper.textContent = "Untitled " + e.target.classList[1];
         e.target.appendChild(wrapper);
+
+        if(e.target.matches("ul.package.epic")) {
+            console.log("found epic");
+        }
     }
 })
 
