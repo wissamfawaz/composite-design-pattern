@@ -50,9 +50,7 @@ class Project extends Task {
 	}
 
     clearProject() {
-        for(i = 0; idx < this.milestones.length; i++) {
-            this.milestones.splice(idx,1);
-        }
+        this.milestones.splice(0);
     }
 	
 }
