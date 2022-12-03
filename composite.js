@@ -48,6 +48,12 @@ class Project extends Task {
 	deleteMilestone(idx) {
 		this.milestones.splice(idx,1);
 	}
+
+    clearProject() {
+        for(i = 0; idx < this.milestones.length; i++) {
+            this.milestones.splice(idx,1);
+        }
+    }
 	
 }
 
