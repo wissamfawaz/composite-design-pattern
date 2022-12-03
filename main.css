@@ -173,7 +173,7 @@ ul.labels
     outline: 1px solid var(--light-color-sd);
 }
 
-.project-info #pgm-name 
+.project-info .pgm-name 
 {
     font-size: 15px;
     text-align: center;

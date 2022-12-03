@@ -6,16 +6,15 @@ const newTaskBtn = document.querySelector(".new-task");
 const containerEl = document.querySelector(".container");
 const eraseBtn = document.querySelector(".erase");
 const deleteBtn = document.querySelector(".delete");
+const cancelFormBtn = document.querySelector(".cancel");
 let deleteRowBtn = document.querySelectorAll(".fa-delete-left");
 
 const packageLabelsEl = document.querySelector(".package-labels");
 const duckEl = document.querySelector(".no-task-img");
 const projectSprintEl = document.querySelector(".project-sprint");
-const pathModulesEl = document.querySelectorAll(".path-modules");
 const rightEl = document.querySelector(".right");
 const middleEl = document.querySelector(".middle");
-const leftEl = document.querySelector(".left");
-const packageEl  = document.querySelectorAll(".package");
+const formEl = document.getElementById("form");
 
 let i = 2;
 
@@ -73,9 +72,7 @@ deleteBtn.addEventListener("click", function(e) {
         if(duckEl.classList.contains("invisible"))
         checkEmpty();
 
-        //feature backend
         project.clearProject();
-        console.log(project);
     }
 })
 
@@ -87,8 +84,16 @@ containerEl.addEventListener("click", function(e) {
         wrapper.textContent = "Untitled " + e.target.classList[1];
         e.target.appendChild(wrapper);
 
+        visibleForm(e);
+
+        //If cancel is clicked, remove the created task
+        cancelFormBtn.addEventListener("click", function(){
+            console.log(e.target);
+            e.target.removeChild(wrapper);
+        })
+
         //feature backend
-        identifyChild(e.target);
+        appendChild(identifyChild(e.target), );
         
     }
 })
@@ -96,6 +101,9 @@ containerEl.addEventListener("click", function(e) {
 //Erase task
 containerEl.addEventListener("click", function(e) {
     if(eraseBtn.classList.contains('erase-active') && e.target.matches("li.task-module")) {
+        //feature backend
+        identifyChild(e.target.parentNode);
+
         e.target.parentNode.removeChild(e.target);
     }
 })
@@ -108,11 +116,10 @@ containerEl.addEventListener("click", function(e) {
     checkEmpty();
 })
 
-
-//When task is clicked open task form to input info
+//When task is double-clicked open task form to input info
 middleEl.addEventListener("dblclick", function(e) {
     if(e.target && (e.target.matches("li.task-module") || e.target.matches("div.project-sprint")) && !eraseBtn.classList.contains('erase-active')) {
-        rightEl.style.display = 'block';
+        visibleForm(e);
     }
 })
 
@@ -121,6 +128,11 @@ rightEl.addEventListener("click", function(e) {
     if(e.target && e.target.matches("button.cancel")) {
         rightEl.style.display = 'none';
     }
+})
+
+//Listens for form submission
+formEl.addEventListener("submit", function(e){
+    getData(e);
 })
 
 //$ Functions
@@ -139,8 +151,46 @@ function confirmDelete() {
     return (confirm(text) == true);
 }
 
+//Makes the delete row buttons visible / invisible
 function activateDeleteRows() 
 {
     deleteRowBtn = document.querySelectorAll(".fa-delete-left");
     deleteRowBtn.forEach(deleteRowBtn => deleteRowBtn.classList.toggle('display'));
+}
+
+//Identifies the type of quest
+function identifyChild(child) 
+{
+    if(child.classList.contains('epic')) {
+        return('epic');
+    } else if(child.classList.contains('user-story')) {
+        return('user-story');
+    } else if(child.classList.contains('subtask')) {
+        return('subtask');
+    } else {
+        return('optional');
+    }
+}
+
+//Appends the child to the corresponding composite
+function appendChild(child, parent, idx) {
+
+}
+
+//Makes the form visible (display: block)
+function visibleForm(e)
+{
+    rightEl.style.display = 'block';
+}
+
+//Gets the data from HTML form
+function getData(e)
+{
+    e.stopImmediatePropagation();
+    e.preventDefault();
+    let data = new FormData(formEl);
+    for (let [k, v] of data.entries()) { 
+        console.log(k, v); 
+    }
+    return false;
 }

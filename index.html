@@ -16,8 +16,8 @@
         <section class="project-info flex-col">
             <input type="text" placeholder="Untitled SprintQuest" id="title" name="title" autocomplete="off">
             <div class="sprint-questers">
-                <input type="text" placeholder="Scrum Master" id="pgm-name" name="scrum-master" autocomplete="off">
-                <input type="text" placeholder="Product Owner" id="pgm-name" name="product-owner" autocomplete="off">
+                <input type="text" placeholder="Scrum Master" class="pgm-name" name="scrum-master" autocomplete="off">
+                <input type="text" placeholder="Product Owner" class="pgm-name" name="product-owner" autocomplete="off">
             </div>
         </section>
     </header>
@@ -102,7 +102,7 @@
         <section class="right flex-col">
             <section class="task-info">
                 <h2>Quest Info</h2>
-                <form action="" class="task-properties flex-col">
+                <form id="form" action="" class="task-properties flex-col">
                     <fieldset>
                         <label for="textarea">Recipients
                             <textarea type="textarea" class="recipients" name="recipients" id="recipients" required></textarea>
