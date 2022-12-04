@@ -7,6 +7,7 @@ const containerEl = document.querySelector(".container");
 const eraseBtn = document.querySelector(".erase");
 const deleteBtn = document.querySelector(".delete");
 const cancelFormBtn = document.querySelector(".cancel");
+const saveFormBtn = document.querySelector(".submit");
 let deleteRowBtn = document.querySelectorAll(".fa-delete-left");
 
 const packageLabelsEl = document.querySelector(".package-labels");
@@ -46,7 +47,7 @@ newTaskBtn.addEventListener("click", function(e) {
     `);
     containerEl.appendChild(wrapper);
 
-    //feature backend
+    //TODO
     project.createMilestone();
     }
 })
@@ -77,31 +78,15 @@ deleteBtn.addEventListener("click", function(e) {
 })
 
 //Create task
-containerEl.addEventListener("click", function(e) {
-    if(e.target && e.target.matches("ul.package") && !eraseBtn.classList.contains('erase-active')) {
-        let wrapper = document.createElement("li");
-        wrapper.classList.add('task-module');
-        wrapper.textContent = "Untitled " + e.target.classList[1];
-        e.target.appendChild(wrapper);
-
-        visibleForm(e);
-
-        //If cancel is clicked, remove the created task
-        cancelFormBtn.addEventListener("click", function(){
-            console.log(e.target);
-            e.target.removeChild(wrapper);
-        })
-
-        //feature backend
-        appendChild(identifyChild(e.target), );
-        
-    }
-})
+containerEl.addEventListener("click", function(e){
+    createTask(e);
+});
 
 //Erase task
 containerEl.addEventListener("click", function(e) {
     if(eraseBtn.classList.contains('erase-active') && e.target.matches("li.task-module")) {
-        //feature backend
+
+        //TODO
         identifyChild(e.target.parentNode);
 
         e.target.parentNode.removeChild(e.target);
@@ -119,7 +104,7 @@ containerEl.addEventListener("click", function(e) {
 //When task is double-clicked open task form to input info
 middleEl.addEventListener("dblclick", function(e) {
     if(e.target && (e.target.matches("li.task-module") || e.target.matches("div.project-sprint")) && !eraseBtn.classList.contains('erase-active')) {
-        visibleForm(e);
+        toggleForm(true);
     }
 })
 
@@ -133,6 +118,8 @@ rightEl.addEventListener("click", function(e) {
 //Listens for form submission
 formEl.addEventListener("submit", function(e){
     getData(e);
+    formEl.reset(); 
+    toggleForm(false);
 })
 
 //$ Functions
@@ -148,7 +135,7 @@ function checkEmpty() {
 
 function confirmDelete() {
     let text = "You are about to NUKE your whole SprintQuest. Are you sure?";
-    return (confirm(text) == true);
+    return (confirm(text));
 }
 
 //Makes the delete row buttons visible / invisible
@@ -172,15 +159,13 @@ function identifyChild(child)
     }
 }
 
-//Appends the child to the corresponding composite
-function appendChild(child, parent, idx) {
-
-}
-
-//Makes the form visible (display: block)
-function visibleForm(e)
+//Toggles the form's visibility display 
+function toggleForm(flag)
 {
+    if(flag)
     rightEl.style.display = 'block';
+    else
+    rightEl.style.display = 'none';
 }
 
 //Gets the data from HTML form
@@ -189,8 +174,48 @@ function getData(e)
     e.stopImmediatePropagation();
     e.preventDefault();
     let data = new FormData(formEl);
+    return data;
+}
+
+//Awaits form response: cancel or save
+async function createTask(e)
+{
+    const target = e.target;
+    if(target && target.matches("ul.package") && !eraseBtn.classList.contains('erase-active')) {
+        toggleForm(true);
+        
+        let wrapper = document.createElement("li");
+        wrapper.classList.add('task-module');
+        wrapper.textContent = "Untitled " + target.classList[1];
+        target.appendChild(wrapper);
+
+        //feature backend
+
+        await formResult()
+            .then(() => {return appendChild(identifyChild(e.target), getData(e), Array.from(e.target.children).indexOf(wrapper));
+            })
+            .catch(() => {target.removeChild(wrapper);})
+    }
+}
+
+function formResult()
+{
+    return new Promise((resolve, reject) => {
+        saveFormBtn.addEventListener("click", function () {
+            resolve();
+        });
+        cancelFormBtn.addEventListener("click", function () {
+            reject();
+        });
+    });
+}
+
+//Appends children to the corresponding composite
+//feature backend
+function appendChild(child, data, childIndex) {
+    console.log(child);
     for (let [k, v] of data.entries()) { 
         console.log(k, v); 
     }
-    return false;
+    console.log(childIndex);
 }
