@@ -332,6 +332,8 @@ ul.labels
     font-size: 2rem;
     font-weight: bold;
     min-width: 10rem;
+    width: fit-content;
+    padding: 0 .5rem;
     min-height: 10rem;
     border-color: var(--sprint-color);
     transition: .25s ease-in-out;
