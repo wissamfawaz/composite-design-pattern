@@ -171,6 +171,7 @@ ul.labels
 .hints
 {
     display: flex;
+    margin-top: 5rem;
     gap: 2rem;
     color:rgb(127, 127, 127)
 }
@@ -326,11 +327,11 @@ ul.labels
     justify-content: center;
     align-items: center;
     text-align: center;
-    min-width: 6.5rem;
-    min-height: 6.5rem;
-    /* max-width: 7.5rem;
-    max-height: 7.5rem; */
+    width: 6.5rem;
+    height: 6.5rem;
     overflow: hidden;
+    text-overflow: ellipsis !important;
+    white-space: wrap;
     margin: .5rem;
     border: 4px solid;
     border-radius: 1rem;
