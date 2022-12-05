@@ -70,6 +70,10 @@ saveQuestBtn.addEventListener("click", function(){
     alert("Saved Successfully!");
     localStorage.setItem("Scrum Master", JSON.stringify(scrumMasterEl.value));
     localStorage.setItem("Product Owner", JSON.stringify(productOwnerEl.value));
+
+    sprint.setProductOwner(JSON.parse(localStorage.getItem("Product Owner")));
+    sprint.setScrumMaster(JSON.parse(localStorage.getItem("Scrum Master")));
+
 });
 
 //Erase button activate / deactivate
