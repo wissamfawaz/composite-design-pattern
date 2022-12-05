@@ -327,11 +327,11 @@ ul.labels
     justify-content: center;
     align-items: center;
     text-align: center;
-    width: 6.5rem;
-    height: 6.5rem;
+    min-width: 6.5rem;
+    min-height: 6.5rem;
     overflow: hidden;
     text-overflow: ellipsis !important;
-    white-space: wrap;
+    flex-wrap: wrap;
     margin: .5rem;
     border: 4px solid;
     border-radius: 1rem;

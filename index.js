@@ -23,12 +23,23 @@ const startDateEl = document.querySelector(".start-date");
 const dueDateEl = document.querySelector(".due-date");
 const budgetEl = document.querySelector(".budget");
 const addNotesEl = document.querySelector(".add-notes");
+const scrumMasterEl = document.querySelector(".scrum-master");
+const productOwnerEl = document.querySelector(".product-owner");
 
+const scrumMasterFromLocal = localStorage.getItem("Scrum Master");
+const productOwnerFromLocal = localStorage.getItem("Product Owner");
 
 //$ Initiating the project
 //feature backend
 const sprint = new Sprint();
 checkEmpty();
+
+if(scrumMasterFromLocal)
+scrumMasterEl.value = JSON.parse(scrumMasterFromLocal);
+
+if(productOwnerFromLocal)
+productOwnerEl.value = JSON.parse(productOwnerFromLocal);
+
 //$ Event Listeners
 
 //Create task module (row)
@@ -57,6 +68,8 @@ newTaskBtn.addEventListener("click", function(e) {
 saveQuestBtn.addEventListener("click", function(){
     localStorage.setItem("SprintQuest", JSON.stringify(sprint));
     alert("Saved Successfully!");
+    localStorage.setItem("Scrum Master", JSON.stringify(scrumMasterEl.value));
+    localStorage.setItem("Product Owner", JSON.stringify(productOwnerEl.value));
 });
 
 //Erase button activate / deactivate
