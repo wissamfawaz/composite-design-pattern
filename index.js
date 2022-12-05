@@ -269,27 +269,18 @@ function deleteFromBackend(child, childIndex)
 function saveChild(child, data, childIndex) {
     let rowIdx = Array.from(child.parentNode.parentNode.parentNode.children).indexOf(child.parentNode.parentNode) -1;
     updateQuestName(child, data);
- 
+
+    let currentElement;
     if(child.parentNode.classList.contains('epic')) {
         if(sprint.getEpic(rowIdx) == undefined)
         sprint.addEpic();
-        sprint.getEpic(rowIdx).setTaskName(data.get('task-name'));
-        sprint.getEpic(rowIdx).setRecipients(data.get('recipients'));
-        sprint.getEpic(rowIdx).setStartDate(data.get('start-date'));
-        sprint.getEpic(rowIdx).setDueDate(data.get('due-date'));
-        sprint.getEpic(rowIdx).setBudget(data.get('budget'));
-        sprint.getEpic(rowIdx).setDescription(data.get('add-notes'));
+        currentElement = sprint.getEpic(rowIdx);
     } else if(child.parentNode.classList.contains('user-story')) {
         let currentEpic = sprint.getEpic(rowIdx);
         try {
             if(currentEpic.getUserStory(childIndex) == undefined)
             currentEpic.addUserStory();
-            currentEpic.getUserStory(childIndex).setTaskName(data.get('task-name'));
-            currentEpic.getUserStory(childIndex).setRecipients(data.get('recipients'));
-            currentEpic.getUserStory(childIndex).setStartDate(data.get('start-date'));
-            currentEpic.getUserStory(childIndex).setDueDate(data.get('due-date'));
-            currentEpic.getUserStory(childIndex).setBudget(data.get('budget'));
-            currentEpic.getUserStory(childIndex).setDescription(data.get('add-notes'));
+            currentElement = currentEpic.getUserStory(childIndex);
         } catch(err) {
             alert('Create an epic first!');
             deleteTask(child);
@@ -299,12 +290,7 @@ function saveChild(child, data, childIndex) {
         try {
             if(currentEpic.getSubTask(childIndex) == undefined)
             currentEpic.addSubTask();
-            currentEpic.getSubTask(childIndex).setTaskName(data.get('task-name'));
-            currentEpic.getSubTask(childIndex).setRecipients(data.get('recipients'));
-            currentEpic.getSubTask(childIndex).setStartDate(data.get('start-date'));
-            currentEpic.getSubTask(childIndex).setDueDate(data.get('due-date'));
-            currentEpic.getSubTask(childIndex).setBudget(data.get('budget'));
-            currentEpic.getSubTask(childIndex).setDescription(data.get('add-notes'));
+            currentElement = currentEpic.getSubTask(childIndex);
         } catch(err) {
             alert('Create an epic or user story first!');
             deleteTask(child);
@@ -314,18 +300,23 @@ function saveChild(child, data, childIndex) {
         try {
             if(currentEpic.getOptionalTask(childIndex) == undefined)
             currentEpic.addOptionalTask();
-            let currentOptionalTask = currentEpic.getOptionalTask(childIndex);
-            currentOptionalTask.setTaskName(data.get('task-name'));
-            currentOptionalTask.setRecipients(data.get('recipients'));
-            currentOptionalTask.setStartDate(data.get('start-date'));
-            currentOptionalTask.setDueDate(data.get('due-date'));
-            currentOptionalTask.setBudget(data.get('budget'));
-            currentOptionalTask.setDescription(data.get('add-notes'));
+            currentElement = currentEpic.getOptionalTask(childIndex);
         } catch(err) {
             alert('Create an epic or user story first!');
             deleteTask(child);
         }
+    } else if(child.classList.contains('project-sprint')){
+        currentElement = sprint;
     }
+
+    try {
+        currentElement.setTaskName(data.get('task-name'));
+        currentElement.setRecipients(data.get('recipients'));
+        currentElement.setStartDate(data.get('start-date'));
+        currentElement.setDueDate(data.get('due-date'));
+        currentElement.setBudget(data.get('budget'));
+        currentElement.setDescription(data.get('add-notes'));
+    } catch(e) {}
     console.log(sprint);
 }
 
