@@ -31,7 +31,9 @@ class Task{
     }
 }
 
+//Project
 class Sprint extends Task {
+
     constructor(){
         super();
         this.epics=[];
@@ -88,7 +90,7 @@ class Epic extends Task {
     }
         
     addOptionalTask(){
-        this.opTask.push(new Task())
+        this.opTasks.push(new Task())
     }
 
     getOptionalTask(idx){

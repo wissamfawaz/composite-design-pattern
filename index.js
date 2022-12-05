@@ -1,4 +1,4 @@
-import {Task, MainTask, Milestone, Project} from "./composite.js";
+import {Task, Epic, UserStory, Sprint} from "./composite.js";
 
 //$ Constants and Variables
 
@@ -17,11 +17,9 @@ const rightEl = document.querySelector(".right");
 const middleEl = document.querySelector(".middle");
 const formEl = document.getElementById("form");
 
-let i = 2;
-
 //$ Initiating the project
 //feature backend
-const project = new Project();
+const sprint = new Sprint();
 
 //$ Event Listeners
 
@@ -36,7 +34,7 @@ newTaskBtn.addEventListener("click", function(e) {
     `
         <i class="fa-solid fa-delete-left"></i>
         <ul class="package epic">
-            <li class="task-module">Epic ${i++}</li>
+            <li class="task-module">Untitled Epic</li>
         </ul>
         <div><i class="fa-solid fa-arrow-right"></i></div>
         <ul class="package user-story"></ul>
@@ -48,7 +46,7 @@ newTaskBtn.addEventListener("click", function(e) {
     containerEl.appendChild(wrapper);
 
     //TODO
-    project.createMilestone();
+    // sprint.addUserStory();
     }
 })
 
@@ -69,26 +67,26 @@ deleteBtn.addEventListener("click", function(e) {
         while(containerEl.childElementCount > 0 && !containerEl.lastElementChild.matches("div.package-labels")) {
             containerEl.lastElementChild.remove();
         }
-        i = 1;
         if(duckEl.classList.contains("invisible"))
         checkEmpty();
 
-        project.clearProject();
+        sprint.clearSprint();
     }
 })
 
 //Create task
 containerEl.addEventListener("click", function(e){
-    createTask(e);
+    if(e.target.matches("ul.package")) {
+        if(!e.target.classList.contains("epic")|| e.target.childElementCount == 0){
+            createTask(e)
+        }
+    }
 });
 
+//TODO link to backend
 //Erase task
 containerEl.addEventListener("click", function(e) {
     if(eraseBtn.classList.contains('erase-active') && e.target.matches("li.task-module")) {
-
-        //TODO link to backend
-        identifyChild(e.target.parentNode);
-
         e.target.parentNode.removeChild(e.target);
     }
 })
@@ -109,7 +107,7 @@ middleEl.addEventListener("dblclick", async function(e) {
     if(target && (target.matches("li.task-module") || target.matches("div.project-sprint")) && !eraseBtn.classList.contains('erase-active')) {
         toggleForm(true);
         await formResult()
-        .then(() => {return appendChild(target, getData(e), getChildIndex(target));
+        .then(() => {return saveChild(target, getData(e), getChildIndex(target));
         })
         .catch(() => {})
     }
@@ -141,7 +139,7 @@ function checkEmpty() {
 }
 
 function confirmDelete() {
-    let text = "You are about to NUKE your whole SprintQuest. Are you sure?";
+    let text = "You are about to NUKE your whole SprintQuest. Any remaining unsaved changes will be lost. Are you sure?";
     return (confirm(text));
 }
 
@@ -179,18 +177,16 @@ function toggleForm(flag)
 async function createTask(e)
 {
     const target = e.target;
-    if(target && target.matches("ul.package") && !eraseBtn.classList.contains('erase-active')) {
+
+    if(target && !eraseBtn.classList.contains('erase-active') && rightEl.style.display != 'block') {
         toggleForm(true);
-        
         let wrapper = document.createElement("li");
         wrapper.classList.add('task-module');
         wrapper.textContent = "Untitled " + target.classList[1];
         target.appendChild(wrapper);
 
         await formResult()
-            .then(() => {return appendChild(wrapper, getData(e), getChildIndex(wrapper));
-            })
-            .catch(() => {target.removeChild(wrapper);})
+            .then(() => {console.log('.then'); return saveChild(wrapper, getData(e), getChildIndex(wrapper));}, () => {console.log('.catch');target.removeChild(wrapper);});
     }
 }
 
@@ -213,18 +209,26 @@ function updateQuestName(child, data)
 
 //TODO link to backend
 //Appends children to the corresponding composite
-function appendChild(child, data, childIndex) {
-    if(data.get('task-name') != '')
+function saveChild(child, data, childIndex) {
+    let rowIdx = Array.from(child.parentNode.parentNode.parentNode.children).indexOf(child.parentNode.parentNode) -1;
     updateQuestName(child, data);
 
-    if(child.classList.contains('epic')) {
-        project.createMilestone();
-
-    } else if(child.classList.contains('user-story')) {
-        return('user-story');
-    } else if(child.classList.contains('subtask')) {
-        return('subtask');
+    if(child.parentNode.classList.contains('epic')) {
+        sprint.addEpic();
+        sprint.getEpic(childIndex).setTaskName(data.get('task-name'));
+    } else if(child.parentNode.classList.contains('user-story')) {
+        let currentEpic = sprint.getEpic(rowIdx);
+        currentEpic.addUserStory();
+        currentEpic.getUserStory(childIndex).setTaskName(data.get('task-name'));
+    } else if(child.parentNode.classList.contains('subtask')) {
+        let currentEpic = sprint.getEpic(rowIdx);
+        currentEpic.addSubTask();
+        currentEpic.getSubTask(childIndex).setTaskName(data.get('task-name'));
     } else {
-        return('optional');
+        let currentEpic = sprint.getEpic(rowIdx);
+        currentEpic.addOptionalTask();
+        currentEpic.getOptionalTask(childIndex).setTaskName(data.get('task-name'));
     }
+
+    console.log(sprint);
 }
