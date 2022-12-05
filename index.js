@@ -70,7 +70,7 @@ eraseBtn.addEventListener("click", function(e) {
     activateDeleteRows();
 })
 
-//Delete SprintQuest canvas
+//Nuke SprintQuest canvas
 deleteBtn.addEventListener("click", function(e) {
     if(confirmDelete()){
         while(containerEl.childElementCount > 0 && !containerEl.lastElementChild.matches("div.package-labels")) {
@@ -80,6 +80,7 @@ deleteBtn.addEventListener("click", function(e) {
         checkEmpty();
 
         sprint.clearSprint();
+        projectSprintEl.textContent = "Untitled SprintQuest";
         console.log(sprint)
     }
 })
