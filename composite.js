@@ -31,69 +31,63 @@ class Task{
     }
 }
 
-class Project extends Task {
+class Sprint extends Task {
     constructor(){
         super();
-        this.milestones=[];
+        this.epics=[];
     }
 	
-	createMilestone() {
-		this.milestones.push(new Milestone())
+	addEpic() {
+		this.epics.push(new Epic())
 	}
 	
-	getMilestone(idx) {
-		return this.milestones[idx];
+	getEpic(idx) {
+		return this.epics[idx];
 	}
 	
-	deleteMilestone(idx) {
-		this.milestones.splice(idx,1);
+	deleteEpic(idx) {
+		this.epics.splice(idx,1);
 	}
 
-    clearProject() {
-        this.milestones.splice(0);
+    clearSprint() {
+        this.epics.splice(0);
     }
 	
 }
 
-class Milestone extends Task {
+class Epic extends Task {
 	constructor(){
         super();
-        this.maintasks=[];
-    }
-	
-	createMainTask() {
-		this.maintasks.push(new MainTask());
-	}
-	
-	getMainTask(idx) {
-		return this.maintasks[idx];
-	}
-	
-	deleteMainTask(idx) {
-		this.maintasks.splice(idx,1);
-	}
-	
-}
-
-class MainTask extends Task{
-    constructor(){
-        super();
+        this.userStories=[];
         this.subtasks=[];
-        this.opTask=[]
+        this.opTasks=[]
     }
-    createSubTask(){
+	
+	addUserStory() {
+		this.userStories.push(new UserStory());
+	}
+	
+	getUserStory(idx) {
+		return this.userStories[idx];
+	}
+	
+	deleteUserStory(idx) {
+		this.userStories.splice(idx,1);
+	}
+
+    addSubTask(){
         this.subtasks.push(new Task());
     }
         
     getSubTask(idx){
-        return subtasks[idx];
+        return this.subtasks[idx];
     }
         
     deleteSubTask(idx){
         this.subtasks.splice(idx, 1);
     }
         
-    createOptionalTask(){
+    addOptionalTask(){
         this.opTask.push(new Task())
     }
 
@@ -103,18 +97,25 @@ class MainTask extends Task{
     deleteOptionalTask(idx){
         this.opTask.splice(idx,1);
     }
-
+	
     calculateBudget(){
         var totalBudget = 0
 
         for(let subtask of subtasks) {
 			totalBudget += subtask.getBudget();
 		}
-		for(let optionalTask of optionalTasks) {
+		for(let optionalTask of opTasks) {
 			totalBudget += optionalTask.getBudget();
 		}
 		return totalBudget;
     }
 }
 
-export {Task, MainTask, Milestone, Project};
+class UserStory extends Task{
+    constructor()
+    {
+        super();
+    }
+}
+
+export {Task, Epic, UserStory, Sprint};
