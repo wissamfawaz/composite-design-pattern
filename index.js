@@ -241,12 +241,15 @@ function updateFormData(child, childIndex)
     } else if(child.classList.contains('project-sprint')) {
         currentElement = sprint;
     }
-    taskNameEl.value = currentElement.getTaskName();
-    recipientsEl.value = currentElement.getRecipients();
-    startDateEl.value = currentElement.getStartDate();
-    dueDateEl.value = currentElement.getDueDate();
-    budgetEl.value = currentElement.getBudget();
-    addNotesEl.value = currentElement.getDescription();
+
+    if(currentElement.getTaskName() != undefined && currentElement.getRecipients() != undefined && currentElement.getDescription() != undefined) {
+        taskNameEl.value = currentElement.getTaskName();
+        recipientsEl.value = currentElement.getRecipients();
+        startDateEl.value = currentElement.getStartDate();
+        dueDateEl.value = currentElement.getDueDate();
+        budgetEl.value = currentElement.getBudget();
+        addNotesEl.value = currentElement.getDescription();
+    }
 }
 
 // Deletes task from backend
