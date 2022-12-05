@@ -11,11 +11,11 @@ class Task{
     setStartDate(startDate){
         this.startDate=startDate;
     }
-    getEndDate(){
-        return this.endDate;
+    getDueDate(){
+        return this.dueDate;
     }
-    setEndDate(endDate){
-        this.endDate=endDate;
+    setDueDate(dueDate){
+        this.dueDate=dueDate;
     }
     getDescription(){
         return this.description;
@@ -28,6 +28,12 @@ class Task{
     }
     setBudget(budget){
         this.budget=budget;
+    }
+    setRecipients(recipients){
+        this.recipients=recipients;
+    }
+    getRecipients(){
+        return this.recipients;
     }
 }
 

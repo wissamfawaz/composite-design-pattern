@@ -49,6 +49,7 @@ newTaskBtn.addEventListener("click", function(e) {
 // Saves SprintQuest to local storage
 saveQuestBtn.addEventListener("click", function(){
     localStorage.setItem("SprintQuest", JSON.stringify(sprint));
+    alert("Saved Successfully!");
 });
 
 //Erase button activate / deactivate
@@ -228,7 +229,6 @@ function deleteFromBackend(child, childIndex)
     console.log(sprint);
 }
 
-//TODO link to backend
 //Appends children to the corresponding composite
 function saveChild(child, data, childIndex) {
     let rowIdx = Array.from(child.parentNode.parentNode.parentNode.children).indexOf(child.parentNode.parentNode) -1;
@@ -238,12 +238,22 @@ function saveChild(child, data, childIndex) {
         if(sprint.getEpic(rowIdx) == undefined)
         sprint.addEpic();
         sprint.getEpic(rowIdx).setTaskName(data.get('task-name'));
+        sprint.getEpic(rowIdx).setRecipients(data.get('recipients'));
+        sprint.getEpic(rowIdx).setStartDate(data.get('start-date'));
+        sprint.getEpic(rowIdx).setDueDate(data.get('due-date'));
+        sprint.getEpic(rowIdx).setBudget(data.get('budget'));
+        sprint.getEpic(rowIdx).setDescription(data.get('add-notes'));
     } else if(child.parentNode.classList.contains('user-story')) {
         let currentEpic = sprint.getEpic(rowIdx);
         try {
             if(currentEpic.getUserStory(childIndex) == undefined)
             currentEpic.addUserStory();
             currentEpic.getUserStory(childIndex).setTaskName(data.get('task-name'));
+            currentEpic.getUserStory(childIndex).setRecipients(data.get('recipients'));
+            currentEpic.getUserStory(childIndex).setStartDate(data.get('start-date'));
+            currentEpic.getUserStory(childIndex).setDueDate(data.get('due-date'));
+            currentEpic.getUserStory(childIndex).setBudget(data.get('budget'));
+            currentEpic.getUserStory(childIndex).setDescription(data.get('add-notes'));
         } catch(err) {
             alert('Create an epic first!');
             deleteTask(child);
@@ -254,6 +264,11 @@ function saveChild(child, data, childIndex) {
             if(currentEpic.getSubTask(childIndex) == undefined)
             currentEpic.addSubTask();
             currentEpic.getSubTask(childIndex).setTaskName(data.get('task-name'));
+            currentEpic.getSubTask(childIndex).setRecipients(data.get('recipients'));
+            currentEpic.getSubTask(childIndex).setStartDate(data.get('start-date'));
+            currentEpic.getSubTask(childIndex).setDueDate(data.get('due-date'));
+            currentEpic.getSubTask(childIndex).setBudget(data.get('budget'));
+            currentEpic.getSubTask(childIndex).setDescription(data.get('add-notes'));
         } catch(err) {
             alert('Create an epic or user story first!');
             deleteTask(child);
@@ -264,6 +279,11 @@ function saveChild(child, data, childIndex) {
             if(currentEpic.getOptionalTask(childIndex) == undefined)
             currentEpic.addOptionalTask();
             currentEpic.getOptionalTask(childIndex).setTaskName(data.get('task-name'));
+            currentEpic.getOptionalTask(childIndex).setRecipients(data.get('recipients'));
+            currentEpic.getOptionalTask(childIndex).setStartDate(data.get('start-date'));
+            currentEpic.getOptionalTask(childIndex).setDueDate(data.get('due-date'));
+            currentEpic.getOptionalTask(childIndex).setBudget(data.get('budget'));
+            currentEpic.getOptionalTask(childIndex).setDescription(data.get('add-notes'));
         } catch(err) {
             alert('Create an epic or user story first!');
             deleteTask(child);
