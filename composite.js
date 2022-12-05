@@ -59,12 +59,12 @@ class Sprint extends Task {
 
     clearSprint() {
         this.epics.splice(0);
-        this.taskName = undefined;
-        this.startDate = undefined;
-        this.dueDate = undefined;
-        this.recipients = undefined;
-        this.budget = undefined;
-        this.description = undefined;
+        this.taskName = '';
+        this.startDate = '';
+        this.dueDate = '';
+        this.recipients = '';
+        this.budget = '';
+        this.description = '';
     }
 
     getScrumMaster() {
