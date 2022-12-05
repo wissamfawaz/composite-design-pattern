@@ -60,6 +60,22 @@ class Sprint extends Task {
     clearSprint() {
         this.epics.splice(0);
     }
+
+    getScrumMaster() {
+        return this.scrumMaster;
+    }
+
+    setScrumMaster(scrumMaster) {
+        this.scrumMaster = scrumMaster;
+    }
+
+    getProductOwner() {
+        return this.productOwner;
+    }
+
+    setProductOwner(productOwner) {
+        this.productOwner = productOwner;
+    }
 	
 }
 

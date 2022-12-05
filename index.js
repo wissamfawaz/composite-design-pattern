@@ -17,6 +17,13 @@ const projectSprintEl = document.querySelector(".project-sprint");
 const rightEl = document.querySelector(".right");
 const middleEl = document.querySelector(".middle");
 const formEl = document.getElementById("form");
+const taskNameEl = document.querySelector(".task-name");
+const recipientsEl = document.querySelector(".recipients");
+const startDateEl = document.querySelector(".start-date");
+const dueDateEl = document.querySelector(".due-date");
+const budgetEl = document.querySelector(".budget");
+const addNotesEl = document.querySelector(".add-notes");
+
 
 //$ Initiating the project
 //feature backend
@@ -108,6 +115,7 @@ middleEl.addEventListener("dblclick", async function(e) {
     let target = e.target;
     if(target && (target.matches("li.task-module") || target.matches("div.project-sprint")) && !eraseBtn.classList.contains('erase-active')) {
         toggleForm(true);
+        updateFormData(target, getChildIndex(e.target));
         await formResult()
         .then(() => {return saveChild(target, getData(e), getChildIndex(target));
         })
@@ -216,6 +224,31 @@ function deleteTask(child)
     parent.removeChild(child);
 }
 
+// fetches data from the backend and updates the form 
+function updateFormData(child, childIndex) 
+{
+    let rowIdx = Array.from(child.parentNode.parentNode.parentNode.children).indexOf(child.parentNode.parentNode) -1;
+
+    let currentElement;
+    if(child.parentNode.classList.contains('epic')) {
+        currentElement = sprint.getEpic(rowIdx);
+    } else if(child.parentNode.classList.contains('user-story')) {
+        currentElement = sprint.getEpic(rowIdx).getUserStory(childIndex);
+    } else if(child.parentNode.classList.contains('subtask')) {
+        currentElement = sprint.getEpic(rowIdx).getSubTask(childIndex);
+    } else if(child.parentNode.classList.contains('optional')) {
+        currentElement = sprint.getEpic(rowIdx).getOptionalTask(childIndex);
+    } else if(child.classList.contains('project-sprint')) {
+        currentElement = sprint;
+    }
+    taskNameEl.value = currentElement.getTaskName();
+    recipientsEl.value = currentElement.getRecipients();
+    startDateEl.value = currentElement.getStartDate();
+    dueDateEl.value = currentElement.getDueDate();
+    budgetEl.value = currentElement.getBudget();
+    addNotesEl.value = currentElement.getDescription();
+}
+
 // Deletes task from backend
 function deleteFromBackend(child, childIndex)
 {
@@ -273,17 +306,18 @@ function saveChild(child, data, childIndex) {
             alert('Create an epic or user story first!');
             deleteTask(child);
         }
-    } else {
+    } else if(child.parentNode.classList.contains('optional')){
         let currentEpic = sprint.getEpic(rowIdx);
         try {
             if(currentEpic.getOptionalTask(childIndex) == undefined)
             currentEpic.addOptionalTask();
-            currentEpic.getOptionalTask(childIndex).setTaskName(data.get('task-name'));
-            currentEpic.getOptionalTask(childIndex).setRecipients(data.get('recipients'));
-            currentEpic.getOptionalTask(childIndex).setStartDate(data.get('start-date'));
-            currentEpic.getOptionalTask(childIndex).setDueDate(data.get('due-date'));
-            currentEpic.getOptionalTask(childIndex).setBudget(data.get('budget'));
-            currentEpic.getOptionalTask(childIndex).setDescription(data.get('add-notes'));
+            let currentOptionalTask = currentEpic.getOptionalTask(childIndex);
+            currentOptionalTask.setTaskName(data.get('task-name'));
+            currentOptionalTask.setRecipients(data.get('recipients'));
+            currentOptionalTask.setStartDate(data.get('start-date'));
+            currentOptionalTask.setDueDate(data.get('due-date'));
+            currentOptionalTask.setBudget(data.get('budget'));
+            currentOptionalTask.setDescription(data.get('add-notes'));
         } catch(err) {
             alert('Create an epic or user story first!');
             deleteTask(child);
