@@ -168,7 +168,14 @@ ul.labels
     transition: .25s ease-in-out;
 }
 
-.project-info #title:focus, .project-info #pgm-name:focus 
+.hints
+{
+    display: flex;
+    gap: 2rem;
+    color:rgb(127, 127, 127)
+}
+
+.project-info #title:focus, .project-info .pgm-name:focus 
 {
     outline: 1px solid var(--light-color-sd);
 }
@@ -319,8 +326,11 @@ ul.labels
     justify-content: center;
     align-items: center;
     text-align: center;
-    width: 6.5rem;
-    height: 6.5rem;
+    min-width: 6.5rem;
+    min-height: 6.5rem;
+    /* max-width: 7.5rem;
+    max-height: 7.5rem; */
+    overflow: hidden;
     margin: .5rem;
     border: 4px solid;
     border-radius: 1rem;
@@ -332,8 +342,8 @@ ul.labels
     font-size: 2rem;
     font-weight: bold;
     min-width: 10rem;
-    width: fit-content;
-    padding: 0 .5rem;
+    width: min-content;
+    padding: 0 1rem;
     min-height: 10rem;
     border-color: var(--sprint-color);
     transition: .25s ease-in-out;
