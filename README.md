@@ -24,5 +24,10 @@ The technologies used for the _current implementation_ of the project are:
     Frontend: 	JavaScript, HTML, CSS
 	Backend:	JavaScript
 
-In order to excecute / open the project on your machine, visit the URL: https://sprintquest.vercel.app/
-Note: The following URL can also be found on this github repository, under the 'About' section.
+In the future, this project's features will include: 
+Calculating the budget for high level tasks and epics based on subtasks budgets;    
+Pinning individual tasks and marking them as "important", which will be reflected in the Gantt Charts;  
+Creating Gantt charts / burndown charts for project managers using Python libraries such as NumPy and Pandas.
+
+Note: In order to excecute / open the project on your machine, visit the URL: https://sprintquest.vercel.app/
+The following URL can also be found on this github repository, under the 'About' section.
