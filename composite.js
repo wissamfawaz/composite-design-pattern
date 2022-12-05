@@ -94,10 +94,10 @@ class Epic extends Task {
     }
 
     getOptionalTask(idx){
-        return this.opTask[idx];
+        return this.opTasks[idx];
     }
     deleteOptionalTask(idx){
-        this.opTask.splice(idx,1);
+        this.opTasks.splice(idx,1);
     }
 	
     calculateBudget(){

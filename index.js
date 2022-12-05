@@ -7,6 +7,7 @@ const containerEl = document.querySelector(".container");
 const eraseBtn = document.querySelector(".erase");
 const deleteBtn = document.querySelector(".delete");
 const cancelFormBtn = document.querySelector(".cancel");
+const saveQuestBtn = document.querySelector(".save");
 const saveFormBtn = document.querySelector(".submit");
 let deleteRowBtn = document.querySelectorAll(".fa-delete-left");
 
@@ -20,7 +21,7 @@ const formEl = document.getElementById("form");
 //$ Initiating the project
 //feature backend
 const sprint = new Sprint();
-
+checkEmpty();
 //$ Event Listeners
 
 //Create task module (row)
@@ -33,9 +34,7 @@ newTaskBtn.addEventListener("click", function(e) {
     wrapper.insertAdjacentHTML("beforeend", 
     `
         <i class="fa-solid fa-delete-left"></i>
-        <ul class="package epic">
-            <li class="task-module">Untitled Epic</li>
-        </ul>
+        <ul class="package epic"></ul>
         <div><i class="fa-solid fa-arrow-right"></i></div>
         <ul class="package user-story"></ul>
         <div><i class="fa-solid fa-arrow-right"></i></div>
@@ -44,11 +43,13 @@ newTaskBtn.addEventListener("click", function(e) {
         <ul class="package optional"></ul>
     `);
     containerEl.appendChild(wrapper);
-
-    //TODO
-    // sprint.addUserStory();
     }
 })
+
+// Saves SprintQuest to local storage
+saveQuestBtn.addEventListener("click", function(){
+    localStorage.setItem("SprintQuest", JSON.stringify(sprint));
+});
 
 //Erase button activate / deactivate
 eraseBtn.addEventListener("click", function(e) {
@@ -71,6 +72,7 @@ deleteBtn.addEventListener("click", function(e) {
         checkEmpty();
 
         sprint.clearSprint();
+        console.log(sprint)
     }
 })
 
@@ -83,24 +85,23 @@ containerEl.addEventListener("click", function(e){
     }
 });
 
-//TODO link to backend
 //Erase task
 containerEl.addEventListener("click", function(e) {
     if(eraseBtn.classList.contains('erase-active') && e.target.matches("li.task-module")) {
+        deleteFromBackend(e.target, getChildIndex(e.target));
         e.target.parentNode.removeChild(e.target);
     }
 })
 
-//TODO link to backend
 //Erase Path Module
 containerEl.addEventListener("click", function(e) {
     if(eraseBtn.classList.contains('erase-active') && e.target.matches("i.fa-delete-left")) {
+        sprint.deleteEpic(getChildIndex(e.target.parentNode)-1);
         e.target.parentNode.parentNode.removeChild(e.target.parentNode);
     }
     checkEmpty();
 })
 
-//TODO link to backend
 //When task is double-clicked open task form to input info
 middleEl.addEventListener("dblclick", async function(e) {
     let target = e.target;
@@ -186,7 +187,7 @@ async function createTask(e)
         target.appendChild(wrapper);
 
         await formResult()
-            .then(() => {console.log('.then'); return saveChild(wrapper, getData(e), getChildIndex(wrapper));}, () => {console.log('.catch');target.removeChild(wrapper);});
+            .then(() => {return saveChild(wrapper, getData(e), getChildIndex(wrapper));}, () => {target.removeChild(wrapper);});
     }
 }
 
@@ -207,28 +208,67 @@ function updateQuestName(child, data)
     child.textContent = data.get('task-name');
 }
 
+// Deletes task from UI
+function deleteTask(child) 
+{
+    let parent = child.parentNode;
+    parent.removeChild(child);
+}
+
+// Deletes task from backend
+function deleteFromBackend(child, childIndex)
+{
+    let rowIdx = Array.from(child.parentNode.parentNode.parentNode.children).indexOf(child.parentNode.parentNode) -1;
+
+    if(child.parentNode.classList.contains('epic')) {sprint.deleteEpic(childIndex)};
+    if(child.parentNode.classList.contains('user-story')) {sprint.getEpic(rowIdx).deleteUserStory(childIndex)};
+    if(child.parentNode.classList.contains('subtask')) {sprint.getEpic(rowIdx).deleteSubTask(childIndex)};
+    if(child.parentNode.classList.contains('optional')) {sprint.getEpic(rowIdx).deleteOptionalTask(childIndex)}; 
+
+    console.log(sprint);
+}
+
 //TODO link to backend
 //Appends children to the corresponding composite
 function saveChild(child, data, childIndex) {
     let rowIdx = Array.from(child.parentNode.parentNode.parentNode.children).indexOf(child.parentNode.parentNode) -1;
     updateQuestName(child, data);
-
+ 
     if(child.parentNode.classList.contains('epic')) {
+        if(sprint.getEpic(rowIdx) == undefined)
         sprint.addEpic();
-        sprint.getEpic(childIndex).setTaskName(data.get('task-name'));
+        sprint.getEpic(rowIdx).setTaskName(data.get('task-name'));
     } else if(child.parentNode.classList.contains('user-story')) {
         let currentEpic = sprint.getEpic(rowIdx);
-        currentEpic.addUserStory();
-        currentEpic.getUserStory(childIndex).setTaskName(data.get('task-name'));
+        try {
+            if(currentEpic.getUserStory(childIndex) == undefined)
+            currentEpic.addUserStory();
+            currentEpic.getUserStory(childIndex).setTaskName(data.get('task-name'));
+        } catch(err) {
+            alert('Create an epic first!');
+            deleteTask(child);
+        }
     } else if(child.parentNode.classList.contains('subtask')) {
         let currentEpic = sprint.getEpic(rowIdx);
-        currentEpic.addSubTask();
-        currentEpic.getSubTask(childIndex).setTaskName(data.get('task-name'));
+        try {
+            if(currentEpic.getSubTask(childIndex) == undefined)
+            currentEpic.addSubTask();
+            currentEpic.getSubTask(childIndex).setTaskName(data.get('task-name'));
+        } catch(err) {
+            alert('Create an epic or user story first!');
+            deleteTask(child);
+        }
     } else {
         let currentEpic = sprint.getEpic(rowIdx);
-        currentEpic.addOptionalTask();
-        currentEpic.getOptionalTask(childIndex).setTaskName(data.get('task-name'));
+        try {
+            if(currentEpic.getOptionalTask(childIndex) == undefined)
+            currentEpic.addOptionalTask();
+            currentEpic.getOptionalTask(childIndex).setTaskName(data.get('task-name'));
+        } catch(err) {
+            alert('Create an epic or user story first!');
+            deleteTask(child);
+        }
     }
-
     console.log(sprint);
 }
+
